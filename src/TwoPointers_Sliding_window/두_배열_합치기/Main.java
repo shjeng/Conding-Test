@@ -1,4 +1,4 @@
-package TwoPointers_Sliding_window;
+package TwoPointers_Sliding_window.두_배열_합치기;
 
 import java.util.Scanner;
 
