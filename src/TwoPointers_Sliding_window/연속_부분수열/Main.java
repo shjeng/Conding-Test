@@ -17,7 +17,12 @@ public class Main {
         }
         int start = 0, end =1, sum = nums[start] + nums[end];
 
-        while(end < N-1){
+        while(end <= N-1){
+            if(start==end) {
+                end++;
+                sum+=nums[end];
+                continue;
+            }
             if(sum == M){
                 sum -= nums[start];
                 start ++; end++;
