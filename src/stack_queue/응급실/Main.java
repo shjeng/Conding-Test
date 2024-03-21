@@ -16,23 +16,30 @@ public class Main {
             if(max<=i1) max = i1;
         }
 
-        Iterator<Integer> iterator = queue.iterator();
-        while(iterator.hasNext()){
-            if(queue.peek() == max) {
-                queue.poll();
-                index--;
+        int answer = 0;
+        while(true){
+            int i = queue.poll();
+            if(i == max && index == 1){
+                answer++;
+                break;
+            }
+            if(i == max){
+                answer++;
+                max = 0;
                 Iterator<Integer> iterator1 = queue.iterator();
-                max=0;
                 while(iterator1.hasNext()){
                     Integer next = iterator1.next();
                     if(max<=next) max = next;
                 }
+            } else{
+                queue.add(i);
+
             }
+            index--;
             if(index == 0) index = queue.size();
-
-
         }
-
-
+        System.out.println(answer);
     }
 }
+
+//Exception in thread "main" java.util.ConcurrentModificationException 정리하기
