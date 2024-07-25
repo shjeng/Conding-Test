@@ -13,7 +13,7 @@ public class Main {
     public void DFS(int v) {
         if (v == n) {
             answer++;
-        } else {
+        } else { // 13 14 15 34 35   45
             for (int nv : graph.get(v)) {
                 if (ch[nv] == 0) {
                     ch[nv] = 1;
@@ -23,6 +23,11 @@ public class Main {
             }
         }
     }
+
+    // 1 => 2 => 3 =>
+    // 3에서 4로간 뒤에 5로가는 거 ok 엔서 1
+    // 4에는 3과 5가 있다고 한다면, 3으로 가는 건 위에서 막아야함
+    // 4에서5 로 가는 거 앤서 +1
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -39,5 +44,7 @@ public class Main {
             int b = scanner.nextInt();
             main.graph.get(a).add(b);
         }
+        main.DFS(1);
+        System.out.println(main.answer);
     }
 }
