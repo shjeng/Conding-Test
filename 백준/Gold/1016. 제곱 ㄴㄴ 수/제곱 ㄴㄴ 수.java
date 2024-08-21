@@ -13,21 +13,23 @@ public class Main {
         boolean[] check = new boolean[(int) (max - min + 1)];
         int answer = 0;
 
+        //  에라토스체네스의 체를 사용해야함.
+        // max가 1조까지 있기 때문에 int를 사용하면 안 됨.
+        // 시간 제한이 있기 때문에 처음부터 세면 안 됨.
+
         for (long i = 2; i * i <= max; i++) {
-            long square = i * i;
+            long square = i * i; // 7  4
             long start = (min / square) * square;
             if (start < min) {
                 start += square;
             }
-            for (long j = start; j <= max; j += square) {
+            for (long j = start ; j <= max;  j += square) {
                 check[(int) (j - min)] = true;
             }
         }
 
         for (int i = 0; i <= (int) (max - min); i++) {
-            if (!check[i]) {
-                answer++;
-            }
+            answer = check[i] ? answer  : answer+1;
         }
 
         System.out.println(answer);
