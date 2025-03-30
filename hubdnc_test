@@ -1,0 +1,74 @@
+문제 #4. 등급 매기기
+허브대학교 1학년 1학기 코딩테스트 점수가 모두 채점되어 아래 DataBase Table에 Insert 되어있습니다.
+이 때 , A등급은 90점 이상 , B등급은 80점 이상 , C등급은 70점 이상 , D등급은 60점 이상
+이 외 모든 점수는 F등급으로 매겨질 때, 학생의 이름과 등급을 가져오는 SQL문을 작성해주세요.
+
+🚩 [제한사항]
+- 단 , 결석 회수가 4회 이상인 학생은 무조건 F등급입니다. - 모든 데이터는 null 값이 허용되지 않습니다. - 코딩테스트 점수 테이블
+
+🚩 [테이블]
+
+name(이름)	score(성적)	absent(결석회수)
+홍길동	95	1
+춘향이	72	0
+심청이	85	3
+심봉사	90	4
+콩쥐	65	0
+팥쥐	52	1
+
+-- 정답
+-- DB: codingtest / Table: hub_university
+select name,
+case
+when absent >= 4 then 'F'
+when score >= 90 then 'A'
+when score >= 80 then 'B'
+when score >= 70 then 'C'
+when score >= 60 then 'D'
+else 'F'
+end as grade
+from hub_university hu ;
+
+------------------------------
+create table a_company(
+	idx int not null,
+    title VARCHAR(255) NOT NULL,
+    notice_dept VARCHAR(50) NOT NULL,
+    post_date DATETIME NOT NULL,
+    view_count INT NOT null,
+    primary key (idx)
+);
+
+INSERT INTO a_company (idx, title, notice_dept, post_date, view_count) VALUES
+(1, '개발팀 전체 공지', '개발팀', '2023-01-05 00:00:00', 205),
+(2, '기획팀 전체 공지', '기획팀', '2023-01-20 00:00:00', 98),
+(3, '디자인팀 공유 사이트 공지', '디자인팀', '2023-01-29 00:00:00', 150),
+(4, '회계팀 Q 컨퍼런스 정리 공지', '회게팀', '2023-02-05 00:00:00', 135),
+(5, '개발팀 Y 프로젝트 미팅 공지', '개발팀', '2023-02-06 00:00:00', 86),
+(6, '디자인팀 X 프로젝트 미팅 공지', '디자인팀', '2023-02-06 00:00:00', 52);
+
+
+SELECT
+ac.notice_dept,
+ac.title,
+ac.view_count,
+ac.post_date
+FROM a_company ac
+JOIN (
+SELECT notice_dept, MAX(post_date) AS max_post_date
+FROM a_company
+GROUP BY notice_dept
+) l
+on ac.notice_dept = l.notice_dept
+and ac.post_date = l.max_post_date;
+------------------------------
+문제 6번
+[알고리즘] 문제 #6. QuickSort 최악의 시간 복잡도
+이론적으로 QuickSort의 최악의 시간 복잡도는 어떻게 됩니까?
+
+🚩 [보기]
+1. O(n)
+2. O(log n)
+3. O(n^2)
+4. O(n log n)
+5. O(n(log n)^2)
